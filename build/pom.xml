@@ -14,7 +14,7 @@
     <bpms-archive-url>http://dev138.mw.lab.eng.bos.redhat.com</bpms-archive-url>
     <bpms-archive-path>candidate/bpms-6.0.1.CR1/jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-path>
     <bpms-archive-name>jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-name>
-    <bpms-version-target>6.0.0</bpms-version-target>
+    <bpms-version-target>6.0.1</bpms-version-target>
   </properties>
   <scm>
     <connection>scm:git:git://github.com:pzapataf/openshift-cartridge-bpms.git</connection>
@@ -99,7 +99,7 @@
                 <directory>${project.build.directory}/${bpms-archive-name}/jboss-eap-6.1</directory>
                 <includes>
                   <include>modules/system/layers/**</include>
-                  <include>jboss-modules.jar</include>
+                  <!--<include>jboss-modules.jar</include>-->
                 </includes>
                 <outputDirectory>${project.build.directory}/../../versions/${bpms-version-target}/jboss/</outputDirectory>
               </fileset>
