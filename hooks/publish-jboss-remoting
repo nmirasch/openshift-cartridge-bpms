@@ -25,4 +25,5 @@ done
 
 [ $# -eq 3 ] || print_help
 
-echo ${OPENSHIFT_GEAR_DNS}:${OPENSHIFT_DV_REMOTING_PORT}
+echo ${OPENSHIFT_GEAR_DNS}:${OPENSHIFT_
+BPMS_REMOTING_PORT}

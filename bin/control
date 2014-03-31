@@ -2,21 +2,21 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-DV_BIN_DIR=${OPENSHIFT_DV_DIR}/bin
-DV_PID_FILE=${OPENSHIFT_HOMEDIR}/app-root/runtime/DV.pid
-DV_DEPLOYMENTS_DIR=${OPENSHIFT_DV_DIR}/standalone/deployments
+BPMS_BIN_DIR=${OPENSHIFT_BPMS_DIR}/bin
+BPMS_PID_FILE=${OPENSHIFT_HOMEDIR}/app-root/runtime/BPMS.pid
+BPMS_DEPLOYMENTS_DIR=${OPENSHIFT_BPMS_DIR}/standalone/deployments
 SCANCONFIG=""
 
-source $DV_BIN_DIR/util
+source $BPMS_BIN_DIR/util
 
-cartridge_type="dv"
-dv_version="6.0.0"
+cartridge_type="bpms"
+BPMS_version="6.0.0"
 
 # Return the deployment-scanner configuration
 function getscanconfig() {
     count=0
     while [ ${count} -lt 4 ]; do
-      controller="${OPENSHIFT_DV_IP}:${OPENSHIFT_DV_MANAGEMENT_NATIVE_PORT}"
+      controller="${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_MANAGEMENT_NATIVE_PORT}"
       scanconfig=`jboss-cli.sh -c --controller=${controller} "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
       if [[ $scanconfig =~ '"outcome" => "success"' ]] ; then
         SCANCONFIG=$scanconfig
@@ -35,7 +35,7 @@ function waitondeployments() {
       client_message "Timed out waiting for management listening port"
       client_message "Could not connect to JBoss management interface, skipping deployment verification"
     else 
-        pushd $DV_DEPLOYMENTS_DIR
+        pushd $BPMS_DEPLOYMENTS_DIR
 
         artifacts=()
         while read -r -d $'\0'; do
@@ -91,12 +91,12 @@ function waitondeployments() {
     fi
 }
 
-# Check if the data virtualization process is running
+# Check if the bpms process is running
 function isrunning() {
     
     # Check for running app
-    if [ -f "$DV_PID_FILE" ]; then
-      jbpid=$(cat $DV_PID_FILE);
+    if [ -f "$BPMS_PID_FILE" ]; then
+      jbpid=$(cat $BPMS_PID_FILE);
       if /bin/ps --pid $jbpid 1>&2 >/dev/null;
       then
         return 0
@@ -147,8 +147,8 @@ function ishttpup() {
     count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_DV_IP}:${OPENSHIFT_DV_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
-            echo "Found ${OPENSHIFT_DV_IP}:${OPENSHIFT_DV_HTTP_PORT} listening port"
+        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_HTTP_PORT} listening port"
             return 0
         fi
         # if the process failed to start, error out immediately
@@ -170,8 +170,8 @@ function ismgmtup() {
     let count=0
     while [ ${count} -lt 10 ]
     do
-        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_DV_IP}:${OPENSHIFT_DV_MANAGEMENT_NATIVE_PORT}" | grep "(LISTEN)" > /dev/null; then
-            echo "Found ${OPENSHIFT_DV_IP}:${OPENSHIFT_DV_MANAGEMENT_NATIVE_PORT} listening port"
+        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_MANAGEMENT_NATIVE_PORT}" | grep "(LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_MANAGEMENT_NATIVE_PORT} listening port"
             return 0
         fi
         let count=${count}+1
@@ -185,7 +185,7 @@ function ismgmtup() {
 function build() {
   echo "Building $cartridge_type cartridge"
 
-  CONFIG_DIR="${OPENSHIFT_DV_DIR}/standalone/configuration"
+  CONFIG_DIR="${OPENSHIFT_BPMS_DIR}/standalone/configuration"
   OPENSHIFT_MAVEN_MIRROR="${CONFIG_DIR}/settings.base.xml"
   if $(echo $OPENSHIFT_GEAR_DNS | egrep -qe "\.rhcloud\.com")
   then
@@ -262,17 +262,17 @@ function build() {
 }
 
 function deploy() {
-  echo "Deploying JBoss Data Virtualization"
+  echo "Deploying JBoss BPM Suite"
 
-  # if repo/deployments has any files in it, sync them to $DV_DEPLOYMENTS_DIR
-  # and delete any files in $DV_DEPLOYMENTS_DIR that don't exist in
+  # if repo/deployments has any files in it, sync them to $BPMS_DEPLOYMENTS_DIR
+  # and delete any files in $BPMS_DEPLOYMENTS_DIR that don't exist in
   # repo/deployments
   if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
-    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $DV_DEPLOYMENTS_DIR
+    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $BPMS_DEPLOYMENTS_DIR
   fi
-  # copy standard dv default wars to deployments
-  pushd $OPENSHIFT_DV_DIR/versions/$dv_version/standalone/deployments
-    cp teiid-dashboard-builder.war $DV_DEPLOYMENTS_DIR
+  # copy standard bpms default wars to deployments
+  pushd $OPENSHIFT_BPMS_DIR/versions/$BPMS_version/standalone/deployments
+    cp teiid-dashboard-builder.war $BPMS_DEPLOYMENTS_DIR
   popd
 }
 
@@ -287,9 +287,9 @@ function start() {
   else
     echo "Starting $cartridge_type cartridge"
 
-    ${DV_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
+    ${BPMS_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
     PROCESS_ID=$!
-    echo "$PROCESS_ID" > ${DV_PID_FILE}
+    echo "$PROCESS_ID" > ${BPMS_PID_FILE}
 
     rc=0
     ishttpup || rc=$?
@@ -309,8 +309,8 @@ function stop() {
   echo "Stopping $cartridge_type cartridge"
 
   if isrunning; then
-		if [ -f "$DV_PID_FILE" ]; then
-			pid=$(cat $DV_PID_FILE);
+		if [ -f "$BPMS_PID_FILE" ]; then
+			pid=$(cat $BPMS_PID_FILE);
 	    echo "Sending SIGTERM to jboss:$pid ..." 1>&2
 	    killtree $pid
 	  else 
@@ -339,10 +339,10 @@ function reload() {
 
 # Clean up any log files
 function tidy() {
-  client_message "Emptying log dir: $OPENSHIFT_DV_LOG_DIR"
+  client_message "Emptying log dir: $OPENSHIFT_BPMS_LOG_DIR"
   shopt -s dotglob
-  rm -rf $OPENSHIFT_DV_LOG_DIR/*
-  rm -rf $OPENSHIFT_DV_DIR/standalone/tmp/*
+  rm -rf $OPENSHIFT_BPMS_LOG_DIR/*
+  rm -rf $OPENSHIFT_BPMS_DIR/standalone/tmp/*
 }
 
 function threaddump() {
@@ -351,22 +351,22 @@ function threaddump() {
     if ! isrunning; then
         echo "Application is stopped"
         exit 1
-    elif [ -f "$DV_PID_FILE" ]; then
-        pid=$(cat $DV_PID_FILE);
+    elif [ -f "$BPMS_PID_FILE" ]; then
+        pid=$(cat $BPMS_PID_FILE);
         java_pid=$(ps h --ppid $pid -o '%p')
         kill -3 $java_pid
         client_result "Success"
         client_result ""
         client_result "The thread dump file will be available via: rhc tail $OPENSHIFT_APP_NAME -g $OPENSHIFT_GEAR_UUID -f ${OPENSHIFT_TMP_DIR}${cartridge_type}.log -o '-n 250'"
     else 
-        echo "Failed to locate DV PID File"
+        echo "Failed to locate BPMS PID File"
     fi
 }
 
 function pre_restore() {
   # this directory contains cached versions of the built jsps which will continue
   # to get used because they have newer dates than the restored archive.
-  rm -rf $OPENSHIFT_DV_DIR/standalone/tmp/* 
+  rm -rf $OPENSHIFT_BPMS_DIR/standalone/tmp/*
 }
 
 export OPENSHIFT_SECRET_TOKEN=${OPENSHIFT_SECRET_TOKEN:-OPENSHIFT_APP_UUID}

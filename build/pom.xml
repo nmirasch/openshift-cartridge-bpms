@@ -4,22 +4,22 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <groupId>org.jboss</groupId>
-  <artifactId>openshift-cartridge-datavirtualization</artifactId>
+  <artifactId>openshift-cartridge-bpms</artifactId>
   <version>6.0.0</version>
   <packaging>pom</packaging>
   <modelVersion>4.0.0</modelVersion>
-  <name>DataVirtualization Cartridge</name>
-  <description>RedHat JBoss DataVirtualization cartridge for OpenShift</description>
+  <name>Red Hat JBoss BPM Suite Cartridge</name>
+  <description>RedHat JBoss BPM Suite cartridge for OpenShift</description>
   <properties>
-    <dv-archive-url>http://dev138.mw.lab.eng.bos.redhat.com</dv-archive-url>
-    <dv-archive-path>candidate/dv-6.0.0-ER2/dv-6.0.0.ER2-redhat-1.zip</dv-archive-path>
-    <dv-archive-name>dv-6.0.0.ER2-redhat-1.zip</dv-archive-name>
-    <dv-version-target>6.0.0</dv-version-target>
+    <bpms-archive-url>http://dev138.mw.lab.eng.bos.redhat.com</bpms-archive-url>
+    <bpms-archive-path>candidate/bpms-6.0.1.CR1/jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-path>
+    <bpms-archive-name>jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-name>
+    <bpms-version-target>6.0.0</bpms-version-target>
   </properties>
   <scm>
-    <connection>scm:git:git://github.com/mdrillin/openshift-cartridge-datavirtualization.git</connection>
-    <developerConnection>scm:git:git@github.com:mdrillin/openshift-cartridge-datavirtualization.git</developerConnection>
-    <url>http://github.com/mdrillin/openshift-cartridge-datavirtualization</url>
+    <connection>scm:git:git://github.com:pzapataf/openshift-cartridge-bpms.git</connection>
+    <developerConnection>scm:git:git@github.com:pzapataf/openshift-cartridge-bpms.git</developerConnection>
+    <url>https://github.com/pzapataf/openshift-cartridge-bpms</url>
     <tag>HEAD</tag>
   </scm>
   <licenses>
@@ -33,14 +33,14 @@
   <url>${site.url}</url>
   <developers>
     <developer>
-      <name>Mark Drilling</name>
-      <id>mark</id>
-      <email>mdrillin@redhat.com</email>
+      <name>Pedro Zapata</name>
+      <id>pzapataf</id>
+      <email>pzapataf@redhat.com</email>
       <organization>Red Hat</organization>
       <roles>
         <role>Developer</role>
       </roles>
-      <timezone>-6</timezone>
+      <timezone>+1</timezone>
     </developer>
   </developers>
 
@@ -53,7 +53,7 @@
 	  <configuration>
 	    <filesets>
               <fileset>
-	      <directory>../versions/${dv-version-target}</directory>
+	      <directory>../versions/${bpms-version-target}</directory>
 	      <includes>
 	        <include>jboss/**</include>
 	      </includes>
@@ -69,14 +69,14 @@
         <executions>
 	    <!--Downloads the DV archive into the build target folder -->
             <execution>
-                <id>download-dv-zip</id>
+                <id>download-bpms-zip</id>
                 <phase>initialize</phase>
                 <goals>
                     <goal>download-single</goal>
                 </goals>
                 <configuration>
-                    <url>${dv-archive-url}</url>
-                    <fromFile>${dv-archive-path}</fromFile>
+                    <url>${bpms-archive-url}</url>
+                    <fromFile>${bpms-archive-path}</fromFile>
                     <toDir>${project.build.directory}</toDir>
                 </configuration>
             </execution>
@@ -96,12 +96,12 @@
             <phase>process-resources</phase>
             <configuration>
               <fileset>
-                <directory>${project.build.directory}/${dv-archive-name}/jboss-eap-6.1</directory>
+                <directory>${project.build.directory}/${bpms-archive-name}/jboss-eap-6.1</directory>
                 <includes>
                   <include>modules/system/layers/**</include>
                   <include>jboss-modules.jar</include>
                 </includes>
-                <outputDirectory>${project.build.directory}/../../versions/${dv-version-target}/jboss/</outputDirectory>
+                <outputDirectory>${project.build.directory}/../../versions/${bpms-version-target}/jboss/</outputDirectory>
               </fileset>
             </configuration> 
           </execution>
@@ -118,14 +118,14 @@
                 <includes>
                   <include>**</include>
                 </includes>
-                <outputDirectory>${project.build.directory}/../../versions/${dv-version-target}/jboss/modules/system/layers/base</outputDirectory>
+                <outputDirectory>${project.build.directory}/../../versions/${bpms-version-target}/jboss/modules/system/layers/base</outputDirectory>
               </fileset>
               <fileset>
                 <directory>${project.build.directory}/../modules</directory>
                 <includes>
                   <include>layers.conf</include>
                 </includes>
-                <outputDirectory>${project.build.directory}/../../versions/${dv-version-target}/jboss/modules</outputDirectory>
+                <outputDirectory>${project.build.directory}/../../versions/${bpms-version-target}/jboss/modules</outputDirectory>
               </fileset>
             </configuration> 
           </execution>

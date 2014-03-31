@@ -1,14 +1,14 @@
-Name: dv
-Cartridge-Short-Name: DV
-Display-Name: JBoss Data Virtualization 6
-Description: A complete data provisioning, federation, integration and management solution that enables organizations to gain actionable and unified information.
+Name: bpms
+Cartridge-Short-Name: BPMS
+Display-Name: Red Hat JBoss BPM Suite 6
+Description: Red Hat JBoss BPM Suite is a comprehensive platform for business process management.
 Version: '6.0.0'
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: Red Hat
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: jboss
-Source-Url: https://github.com/jboss-datavirtualization/openshift-cartridge-datavirtualization.git
+Source-Url: https://github.com/pzapataf/openshift-cartridge-bpms.git
 Categories:
 - service
 - web_framework
@@ -20,15 +20,15 @@ Website: http://www.jboss.org
 Help-Topics:
   Developer Center: https://www.openshift.com/developers
 Provides:
-  - dv-6.0.0
-  - "dv"
-  - "dv(version) = 6.0.0"
-  - "dv(version) >= 6.0.0"
+  - bpms-6.0.0
+  - "bpms"
+  - "bpms(version) = 6.0.0"
+  - "bpms(version) >= 6.0.0"
 Publishes:
   publish-jboss-cluster:
-    Type: NET_TCP:dv-cluster-info
+    Type: NET_TCP:bpms-cluster-info
   publish-jboss-remoting:
-    Type: NET_TCP:dv-remoting-info
+    Type: NET_TCP:bpms-remoting-info
 Subscribes:
   set-db-connection-info:
     Type: "NET_TCP:db:connection-info"
@@ -47,9 +47,9 @@ Subscribes:
     Type: STRING:urlpath
     Required: false
   set-jboss-cluster:
-    Type: NET_TCP:dv-cluster-info
+    Type: NET_TCP:bpms-cluster-info
   set-jboss-remoting:
-    Type: NET_TCP:dv-remoting-info
+    Type: NET_TCP:bpms-remoting-info
   set-generic-java:
     Type: ENV:NET_TCP:generic-java
 Scaling:
@@ -57,7 +57,7 @@ Scaling:
   Max: 1
 Group-Overrides:
   - components:
-    - dv-6.0.0
+    - bpms-6.0.0
     - web_proxy
 Endpoints:
 - Private-IP-Name: IP

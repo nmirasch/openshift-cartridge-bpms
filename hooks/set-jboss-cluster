@@ -17,4 +17,4 @@ for arg in $kvargs; do
     fi
 done
 
-echo $list > $OPENSHIFT_DV_DIR/env/OPENSHIFT_DV_CLUSTER
+echo $list > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_CLUSTER
