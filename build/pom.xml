@@ -12,8 +12,8 @@
   <description>RedHat JBoss BPM Suite cartridge for OpenShift</description>
   <properties>
     <bpms-archive-url>http://dev138.mw.lab.eng.bos.redhat.com</bpms-archive-url>
-    <bpms-archive-path>candidate/bpms-6.0.1.CR1/jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-path>
-    <bpms-archive-name>jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-name>
+    <bpms-archive-name>jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-name>    
+    <bpms-archive-path>candidate/bpms-6.0.1.CR1/${jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip}</bpms-archive-path>
     <bpms-version-target>6.0.1</bpms-version-target>
   </properties>
   <scm>
