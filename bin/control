@@ -272,7 +272,7 @@ function deploy() {
  # fi
   # copy standard bpms default wars to deployments
   pushd $OPENSHIFT_BPMS_DIR/versions/$BPMS_version/standalone/deployments
-    #cp teiid-dashboard-builder.war $BPMS_DEPLOYMENTS_DIR
+    cp dashbuilder.war $BPMS_DEPLOYMENTS_DIR
   popd
 }
 
