@@ -5,7 +5,7 @@
 
   <groupId>org.jboss</groupId>
   <artifactId>openshift-cartridge-bpms</artifactId>
-  <version>6.0.0</version>
+  <version>6.0.1</version>
   <packaging>pom</packaging>
   <modelVersion>4.0.0</modelVersion>
   <name>Red Hat JBoss BPM Suite Cartridge</name>

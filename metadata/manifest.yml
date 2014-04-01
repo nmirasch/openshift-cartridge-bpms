@@ -2,7 +2,7 @@ Name: bpms
 Cartridge-Short-Name: BPMS
 Display-Name: Red Hat JBoss BPM Suite 6
 Description: Red Hat JBoss BPM Suite is a comprehensive platform for business process management.
-Version: '6.0.0'
+Version: '6.0.1'
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: Red Hat
@@ -20,10 +20,10 @@ Website: http://www.jboss.org
 Help-Topics:
   Developer Center: https://www.openshift.com/developers
 Provides:
-  - bpms-6.0.0
+  - bpms-6.0.1
   - "bpms"
-  - "bpms(version) = 6.0.0"
-  - "bpms(version) >= 6.0.0"
+  - "bpms(version) = 6.0.1"
+  - "bpms(version) >= 6.0.1"
 Publishes:
   publish-jboss-cluster:
     Type: NET_TCP:bpms-cluster-info
@@ -57,7 +57,7 @@ Scaling:
   Max: 1
 Group-Overrides:
   - components:
-    - bpms-6.0.0
+    - bpms-6.0.1
     - web_proxy
 Endpoints:
 - Private-IP-Name: IP

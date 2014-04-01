@@ -10,7 +10,7 @@ SCANCONFIG=""
 source $BPMS_BIN_DIR/util
 
 cartridge_type="bpms"
-BPMS_version="6.0.0"
+BPMS_version="6.0.1"
 
 # Return the deployment-scanner configuration
 function getscanconfig() {
