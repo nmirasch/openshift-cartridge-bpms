@@ -67,7 +67,7 @@ echo "${dbadmin_username}=${dbadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standal
 # Create the bpms-security-roles.properties file
 #
 echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${teiiduser_username}=user,odata,rest" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmsuser_username}=user,odata,rest" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${dbadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 # Create the modeshape-users.properties file
