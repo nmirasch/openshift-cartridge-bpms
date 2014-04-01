@@ -18,7 +18,7 @@ mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
 cp ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_BPMS_DIR}/template/.openshift/config
-cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/teiid-dashboard-builder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/teiid-dashboard-builder.war
+#cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/teiid-dashboard-builder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/teiid-dashboard-builder.war
 
 sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_BPMS_DIR}/template/pom.xml
 
@@ -38,19 +38,19 @@ set_env_var DISABLE_OPENSHIFT_MANAGED_SERVER_CONFIG true ~/.env/user_vars
 # Set usernames, generate passwords and create env variables
 echo 'Generating username and password'
 
-teiiduser_username=user
+bpmsuser_username=user
 dbadmin_username=dbadmin
 msuser_username=msuser
 msadmin_username=msadmin
-teiiduser_password=$(generate_password)
+bpmsuser_password=$(generate_password)
 dbadmin_password=$(generate_password)
 msuser_password=$(generate_password)
 msadmin_password=$(generate_password)
 
 # env vars
 #
-echo "$teiiduser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_TEIIDUSER_USERNAME
-echo "$teiiduser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_TEIIDUSER_PASSWORD
+echo "$bpmsuser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMSUSER_USERNAME
+echo "$bpmsuser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMSUSER_PASSWORD
 echo "$dbadmin_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_DBADMIN_USERNAME
 echo "$dbadmin_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_DBADMIN_PASSWORD
 echo "$msuser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSUSER_USERNAME
@@ -58,17 +58,17 @@ echo "$msuser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSUSER_PASSWORD
 echo "$msadmin_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSADMIN_USERNAME
 echo "$msadmin_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSADMIN_PASSWORD
 
-# Create the teiid-security-users.properties file
+# Create the bpms-security-users.properties file
 # ${OPENSHIFT_BPMS_DIR}/standalone/deployments
-echo "# username=password" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-users.properties"
-echo "${teiiduser_username}=${teiiduser_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-users.properties"
-echo "${dbadmin_username}=${dbadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-users.properties"
+echo "# username=password" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmsuser_username}=${bpmsuser_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${dbadmin_username}=${dbadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
 
-# Create the teiid-security-roles.properties file
+# Create the bpms-security-roles.properties file
 #
-echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-roles.properties"
-echo "${teiiduser_username}=user,odata,rest" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-roles.properties"
-echo "${dbadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/teiid-security-roles.properties"
+echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${teiiduser_username}=user,odata,rest" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${dbadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 # Create the modeshape-users.properties file
 #
@@ -85,8 +85,8 @@ echo "${msadmin_username}=connect,admin,readonly,readwrite" >> "${OPENSHIFT_BPMS
 client_result ""
 client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
 client_result ""
-client_result "              Teiid User: $teiiduser_username"
-client_result "     Teiid User Password: $teiiduser_password"
+client_result "              Teiid User: $bpmsuser_username"
+client_result "     Teiid User Password: $bpmsuser_password"
 client_result ""
 client_result "         Dashboard Admin: $dbadmin_username"
 client_result "Dashboard Admin Password: $dbadmin_password"
