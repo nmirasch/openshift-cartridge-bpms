@@ -267,9 +267,9 @@ function deploy() {
   # if repo/deployments has any files in it, sync them to $BPMS_DEPLOYMENTS_DIR
   # and delete any files in $BPMS_DEPLOYMENTS_DIR that don't exist in
   # repo/deployments
-  if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
-  #  rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $BPMS_DEPLOYMENTS_DIR
-  fi
+ # if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
+ #   rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $BPMS_DEPLOYMENTS_DIR
+ # fi
   # copy standard bpms default wars to deployments
   pushd $OPENSHIFT_BPMS_DIR/versions/$BPMS_version/standalone/deployments
     #cp teiid-dashboard-builder.war $BPMS_DEPLOYMENTS_DIR
