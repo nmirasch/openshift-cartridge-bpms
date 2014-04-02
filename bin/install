@@ -53,12 +53,9 @@ echo 'Generating username and password'
 
 bpmsuser_username=user
 dbadmin_username=dbadmin
-msuser_username=msuser
-msadmin_username=msadmin
+
 bpmsuser_password=$(generate_password)
 dbadmin_password=$(generate_password)
-msuser_password=$(generate_password)
-msadmin_password=$(generate_password)
 
 # env vars
 #
@@ -66,10 +63,6 @@ echo "$bpmsuser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMSUSER_USER
 echo "$bpmsuser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMSUSER_PASSWORD
 echo "$dbadmin_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_DBADMIN_USERNAME
 echo "$dbadmin_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_DBADMIN_PASSWORD
-echo "$msuser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSUSER_USERNAME
-echo "$msuser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSUSER_PASSWORD
-echo "$msadmin_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSADMIN_USERNAME
-echo "$msadmin_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_MSADMIN_PASSWORD
 
 # Create the bpms-security-users.properties file
 # ${OPENSHIFT_BPMS_DIR}/standalone/deployments
@@ -83,32 +76,14 @@ echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/
 echo "${bpmsuser_username}=user,odata,rest" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${dbadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
-# Create the modeshape-users.properties file
-#
-echo "# username=password" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-users.properties"
-echo "${msuser_username}=${msuser_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-users.properties"
-echo "${msadmin_username}=${msadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-users.properties"
-
-# Create the modeshape-roles.properties file
-#
-echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-roles.properties"
-echo "${msuser_username}=connect,readonly" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-roles.properties"
-echo "${msadmin_username}=connect,admin,readonly,readwrite" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/modeshape-roles.properties"
-
 client_result ""
 client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
 client_result ""
-client_result "              Teiid User: $bpmsuser_username"
-client_result "     Teiid User Password: $bpmsuser_password"
+client_result "              BPMS/Dashbuilder User: $bpmsuser_username"
+client_result "     BPMS/Dashbuilder Password: $bpmsuser_password"
 client_result ""
-client_result "         Dashboard Admin: $dbadmin_username"
-client_result "Dashboard Admin Password: $dbadmin_password"
-client_result ""
-client_result "          Modeshape User: $msuser_username"
-client_result " Modeshape User Password: $msuser_password"
-client_result ""
-client_result "         Modeshape Admin: $msadmin_username"
-client_result "Modeshape Admin Password: $msadmin_password"
+client_result "         BPMS/Dashbuilder Admin: $dbadmin_username"
+client_result "BPMS/Dashbuilder Admin Password: $dbadmin_password"
 client_result ""
 
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
