@@ -14,6 +14,12 @@ ln -s ${OPENSHIFT_BPMS_DIR}/standalone/log ${OPENSHIFT_BPMS_DIR}/logs
 
 shopt -s dotglob
 cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/template/* ${OPENSHIFT_BPMS_DIR}/template
+
+##
+## Remove .git directory for space
+##
+rm -rf ${OPENSHIFT_BPMS_DIR}/.git
+
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
