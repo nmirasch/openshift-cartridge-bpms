@@ -18,7 +18,12 @@ mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
 cp ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_BPMS_DIR}/template/.openshift/config
-cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
+##cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
+cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+
 
 sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_BPMS_DIR}/template/pom.xml
 
