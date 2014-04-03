@@ -117,12 +117,26 @@ echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration
 client_result ""
 client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
 client_result ""
-client_result "              BPMS/Dashbuilder User: $bpmsuser_username"
-client_result "     BPMS/Dashbuilder Password: $bpmsuser_password"
+client_result "              BPMS Admin User: $bpmadmin_username"
+client_result "     BPMS Admin Password: $bpmadmin_password"
 client_result ""
-client_result "         BPMS/Dashbuilder Admin: $dbadmin_username"
-client_result "BPMS/Dashbuilder Admin Password: $dbadmin_password"
+client_result "              BPMS Analyst User: $bpmanalyst_username"
+client_result "     BPMS Analyst Password: $bpmanalyst_password"
 client_result ""
+client_result "              BPMS Developer User: $bpmdeveloper_username"
+client_result "     BPMS Developer Password: $bpmdeveloper_password"
+client_result ""
+client_result "              BPMS User User: $bpmuser_username"
+client_result "     BPMS User Password: $bpmuser_password"
+client_result ""
+client_result "              BPMS Manager User: $bpmmanager_username"
+client_result "     BPMS Manager Password: $bpmmanager_password"
+client_result ""
+client_result "              BPMS Root User: $root_username"
+client_result "     BPMS Root Password: $root_password"
+client_result ""
+
+
 
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING
