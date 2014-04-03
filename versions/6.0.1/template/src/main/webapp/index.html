@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to BPMS on OpenShift</title>
+  <title>Welcome to Red Hat JBoss BPM Suite on OpenShift</title>
   <style>
   html { 
   background: black; 
@@ -122,41 +122,26 @@
     <div class="brand-text"><strong>Open</strong>Shift</div>
   </a>
   <h1>
-    Welcome to the OpenShift BPMS Cartridge
+    Welcome to the OpenShift BPM Cartridge
   </h1>
 
 <h2>Summary</h2>
-<p><strong>JBoss BPMS</strong> provides the following components:
+<p><strong>JBoss Red Hat BPM Suite</strong> provides the following components:
   <ul>
-      <li><a href="business-central">business-central</a> - Red Hat JBoss BPM Suite 6. Red Hat JBoss BPM Suite is an open source business process management suite that combines Business Process Management and Business Rules Management and enables business and IT users to create, manage, validate, and deploy Business Processes and Rules.</li>
-      <li><a href="dashbuilder">dashbuilder</a> - Dashbuilder. Access to dashbuilder that allows non-technical users to visually create business dashboards</li>
+      <li><a href="business-central">Business Central</a> - Red Hat JBoss BPM Suite 6. Red Hat JBoss BPM Suite is an open source business process management suite that combines Business Process Management and Business Rules Management and enables business and IT users to create, manage, validate, and deploy Business Processes and Rules.</li>
+      <li><a href="dashbuilder">Dashbuilder (BAM)</a> - Dashbuilder. The Business Activity Component that allows non-technical users to visually create business dashboards and interactive reports.</li>
   </ul>
+</p>
+<p>
+You can log in into both applications just by using the credentials generated during the cartridge installation.
 </p>
 
 <h2>Getting Started</h2>
-<p>Information about the BPMS cartridge can be found on the <a href="https://github.com/pzapataf/openshift-cartridge-bpms">github repository home</a></p>
-<p>To get started using the BPMS instance, see the following documentation:
+<p>To get started using this BPMS instance, see the following documentation:
   <ul>
-    <li><a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_BPM_Suite/">Red Hat JBoss BPM Suite 6 Documentation</a></li>
-    <li><a href="http://www.dashbuilder.org/">Dashbuilder is a full featured web application which allows non-technical users to visually create business dashboards. Dashboard data can be extracted from heterogeneous sources of information such as JDBC databases or regular text files. </a></li>
+    <li><a target="_blank" href="https://access.redhat.com/site/documentation/en-US/Red_Hat_JBoss_BPM_Suite/">Red Hat JBoss BPM Suite 6 Documentation</a></li>
   </ul>
 </p>
-
-<h2>Deploy applications</h2>
-  <p>You can deploy your own applications to the OpenShift BPMS instance</p>
-  <p>
-    For example, you can clone the instance to your local directory:
-  </p>
-  <pre>
-    git clone [openshiftUrl]
-  </pre>
-  <p>where [openshfitUrl] is obtained from the OpenShift web console.  You can then add or edit applications in the local git repo, then push the changes to OpenShift:
-  </p>
-  <pre>
-    git commit -a -m 'Some commit message'
-    git push
-  </pre>
-
 <h2>Debugging</h2>
 <p>View debugging information about the server environment including memory pools by loading this JSP page: <a href="snoop.jsp">Debug</a></p>
 
