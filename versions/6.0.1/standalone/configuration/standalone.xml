@@ -126,7 +126,7 @@
 	<subsystem xmlns="urn:jboss:domain:configadmin:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:1.1">
             <datasources>
-                <!--datasource jndi-name="java:jboss/datasources/ExampleDS"
+                <datasource jndi-name="java:jboss/datasources/ExampleDS"
                             enabled="true" use-java-context="true" pool-name="H2DS">
                     <connection-url>jdbc:h2:${jboss.server.data.dir}/test;DB_CLOSE_DELAY=-1
                     </connection-url>
@@ -135,8 +135,8 @@
                         <user-name>sa</user-name>
                         <password>sa</password>
                     </security>
-                </datasource-->
-                <datasource jndi-name="java:jboss/datasources/MySQLDS" enabled="${mysql.enabled}" use-java-context="true" pool-name="MySQLDS" use-ccm="true">
+                </datasource>
+                <!--datasource jndi-name="java:jboss/datasources/MySQLDS" enabled="${mysql.enabled}" use-java-context="true" pool-name="MySQLDS" use-ccm="true">
                     <connection-url>jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:${env.OPENSHIFT_MYSQL_DB_PORT}/${env.OPENSHIFT_APP_NAME}
                     </connection-url>
                     <driver>mysql</driver>
@@ -148,13 +148,14 @@
                         <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
                         <background-validation>true</background-validation>
                         <background-validation-millis>60000</background-validation-millis>
-                        <!--<validate-on-match>true</validate-on-match>-->
+                        <! - -<validate-on-match>true</validate-on-match>- - >
                     </validation>
                     <pool>
                         <flush-strategy>IdleConnections</flush-strategy>
                         <allow-multiple-users/>
                     </pool>
-                </datasource>
+                </datasource-->
+
                 <!--datasource jndi-name="java:jboss/datasources/PostgreSQLDS" enabled="${postgresql.enabled}" use-java-context="true" pool-name="PostgreSQLDS" use-ccm="true">
                     <connection-url>jdbc:postgresql://${env.OPENSHIFT_POSTGRESQL_DB_HOST}:${env.OPENSHIFT_POSTGRESQL_DB_PORT}/${env.OPENSHIFT_APP_NAME}
                     </connection-url>
