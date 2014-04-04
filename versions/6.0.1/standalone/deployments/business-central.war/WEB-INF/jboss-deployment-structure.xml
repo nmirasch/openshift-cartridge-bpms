@@ -25,8 +25,8 @@
 <module name="com.google.protobuf" export="true" services="import" meta-inf="import"/>
 
 <!--module name="com.h2database.h2" export="true" services="import" meta-inf="import"/ -->
-<module name="com.mysql.jdbc" export="true" services="import" meta-inf="import"/>
-<!-- module name="org.postgresql.jdbc" export="true" services="import" meta-inf="import"/ -->
+<!--module name="com.mysql.jdbc" export="true" services="import" meta-inf="import"/-->
+< module name="org.postgresql.jdbc" export="true" services="import" meta-inf="import"/>
 
 <module name="com.opensymphony.quartz" export="true" services="import" meta-inf="import"/>
 <module name="com.sun.xml.bind" export="true" services="import" meta-inf="import"/>
