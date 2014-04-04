@@ -23,7 +23,18 @@
         <res-type>javax.sql.DataSource</res-type>
         <jndi-name>java:jboss/datasources/MySQLDS</jndi-name>
     </resource-ref>
-
+<!--
+    <resource-ref>
+        <res-ref-name>jdbc/dashbuilder</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/ExampleDS</jndi-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>jdbc/dashbuilder</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
+    </resource-ref>
+  -->
     <!--
         Use by default the JBoss AS security domain.
         In order to access as superuser to the Dashboard Builder app you must create a user with login="root".
