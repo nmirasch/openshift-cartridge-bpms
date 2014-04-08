@@ -16,8 +16,8 @@
 
   <persistence-unit name="org.jbpm.domain" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
-    <!--jta-data-source>java:jboss/datasources/MySQLDS</jta-data-source-->
+    <!--jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source-->
+    <jta-data-source>java:jboss/datasources/MySQLDS</jta-data-source>
     <!--jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source -->
 
 
@@ -71,8 +71,8 @@
 
     <properties>
       <!--property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" /-->
-      <!--property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /-->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+      <!--property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /-->
 
       <property name="hibernate.max_fetch_depth" value="3" />
       <property name="hibernate.hbm2ddl.auto" value="update" />
