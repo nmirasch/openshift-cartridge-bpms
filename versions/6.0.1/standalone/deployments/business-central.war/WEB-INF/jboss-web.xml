@@ -26,6 +26,11 @@
         If you choose to use a custom security domain then you should define it into the
         <jboss-as7>/standalone/configuration/standalone.xml file.
      -->
+    <resource-ref>
+        <res-ref-name>jdbc/businessCentral</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/MySQLDS</jndi-name>
+    </resource-ref>
     <security-domain>other</security-domain>
 
 </jboss-web>
