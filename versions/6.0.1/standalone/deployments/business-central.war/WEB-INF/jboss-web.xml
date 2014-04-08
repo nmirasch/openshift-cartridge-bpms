@@ -11,7 +11,12 @@
     <resource-ref>
         <res-ref-name>jdbc/dashbuilder</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
-        <jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
+        <jndi-name>java:jboss/datasources/MySQLDS</jndi-name>
     </resource-ref>
+    <!--resource-ref>
+        <res-ref-name>jdbc/dashbuilder</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/PostgreSQLDS</jndi-name>
+    </resource-ref-->
 
 </jboss-web>
