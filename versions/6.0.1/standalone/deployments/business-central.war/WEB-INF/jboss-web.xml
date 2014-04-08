@@ -17,8 +17,7 @@
 
 -->
 <jboss-web>
-    <context-root>/business-central</context-root>
-    <!--
+     <!--
         Use by default the JBoss AS security domain.
         In order to access as superuser to the Dashboard Builder app you must create a user with login="root".
         (Users can be registered using the bin/add-user.sh command)
