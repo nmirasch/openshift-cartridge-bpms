@@ -164,15 +164,7 @@
                         <user-name>${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}</user-name>
                         <password>${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}</password>
                     </security>
-                    <validation>
-                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
-                        <background-validation>true</background-validation>
-                        <background-validation-millis>60000</background-validation-millis>
-                      </validation>
-                    <pool>
-                        <flush-strategy>IdleConnections</flush-strategy>
-                        <allow-multiple-users/>
-                    </pool>
+
                 </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
