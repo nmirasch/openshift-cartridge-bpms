@@ -130,6 +130,9 @@ To access into the gear type:
 
 	rhc ssh <APPLICATION-ID>
 
+Example
+-----
+
 <img title="Logo Title Text 1" alt="alt text" src="https://raw.githubusercontent.com/nmirasch/openshift-cartridge-bpms/master/example_img/1_exploreProject.png">
 
 
